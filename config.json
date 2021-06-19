@@ -1,3 +1,9 @@
 {
-  "token": ""
+  "token": "",
+  "sourceChannel": "",
+  "destinationChannel": "",
+  "messageIncludes": [
+    "",
+    ""
+  ]
 }

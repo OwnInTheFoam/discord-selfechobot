@@ -1,6 +1,5 @@
 https://github.com/drdre-08/discord-selfechobot.git
 
-
 npm init
 
 npm install discord.js
@@ -21,4 +20,14 @@ navigate to network tab
 send a message in a channel
 on the new inputs on network tab, copy authorization value under header
 
-git update-index --assume-unchanged config.json git update-index --no-assume-unchanged config.json
+git update-index --assume-unchanged config.json
+git update-index --no-assume-unchanged config.json
+
+npm install nodemon
+
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js",
+    "debug": "nodemon ./index.ts"
+  }
+
