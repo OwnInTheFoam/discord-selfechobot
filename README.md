@@ -1,5 +1,3 @@
-https://github.com/drdre-08/discord-selfechobot.git
-
 npm init
 
 npm install discord.js
@@ -10,6 +8,10 @@ git init
 git status
 git add .
 git commit -m "Initial commit"
+
+git remote add origin https://github.com/drdre-08/discord-selfechobot.git
+git remote -v
+git push -u origin master
 
 // to use an offical discord bot:
 https://discord.com/developers/applications create you bot generate a invite link from OAuth2 browse to invite link and add to server
