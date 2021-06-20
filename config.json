@@ -2,7 +2,8 @@
   "token": "",
   "sourceChannel": "",
   "destinationChannel": "",
-  "messageIncludes": [
+  "messageMustInclude": "",
+  "messageAnyIncludes": [
     "",
     ""
   ]

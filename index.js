@@ -13,11 +13,12 @@ if(config.sourceChannel.trim()==''){
 if(config.destinationChannel.trim()==''){
   console.log('Please provide a valid config json file: destination channel missing.');
 }
-if(!config.messageIncludes.length){
+if(!config.messageAnyIncludes.length){
   console.log('Please provide a valid config json file: message includes missing.');
 }
 const TOKEN = config.token.trim();
-const MESSAGEINCLUDES = config.messageIncludes;
+const MESSAGEMUSTINCLUDE = config.messageMustInclude;
+const MESSAGEANYINCLUDES = config.messageAnyIncludes;
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -102,9 +103,12 @@ async function getLastMessage() {
               // tests wether at least one element in the array passes the test
               //   array is the message includes list
               //   test is message contains/includes that message include
-              if (MESSAGEINCLUDES.some(v => message.content.includes(v))) {
-                // we have a match post to my channel!
-                sendMessage(message);
+              if (MESSAGEANYINCLUDES.some(v => message.content.includes(v))) {
+                // now ensure the message includes any must include if provided.
+                if(!MESSAGEMUSTINCLUDE.length || (MESSAGEMUSTINCLUDE.length && message.content.includes(MESSAGEMUSTINCLUDE))){
+                  // we have a match post to my channel!
+                  sendMessage(message);
+                }
               }
             });
           }
