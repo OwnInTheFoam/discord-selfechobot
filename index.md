@@ -1,37 +1,64 @@
-## Welcome to GitHub Pages
+## Discord Self Echo Bot GitHub Page
+This is a discord self bot aimed at echoing important messages from one channel to another in which a account has access to. Allowing the user to only monitor a single channel for messages that they deem important.
+This bot currently will monitor a given discord channel every minute and read the last 10 messages for certain text words within the message. If the text words appear then the message will be echo'd to a provided discord channel.
 
-You can use the [editor on GitHub](https://github.com/drdre-08/discord-selfechobot/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### Disclaimer
+Written in the Discord API Terms Of Service, self bot's are not allowed. If they are detected, you can get banned. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+*"[...] Automating normal user accounts (generally called "self-bots") outside of the OAuth2/bot API is 
+forbidden, and can result in an account termination if found."* *- quote [Discord Bots TOS](https://discordapp.com/developers/docs/topics/oauth2#bot-vs-user-accounts)*
 
-### Markdown
+Use this selfbot on your or any Discord account(s) at your own risk. I held no liablity if your accounts get terminated.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Installation
+### Setup Configuration File
+In the root directory please complete the config.json file by providing the following parameters:
 
-```markdown
-Syntax highlighted code block
+**token:**
+- In browser whilst on [discord](https://discord.com/app) open developer tools (`ctl + shift + i`)
+- Navigate to network tab
+- Send a message in any channel
+- New inputs on network tab should appear, select one
+- Search and Copy the `authorization` value under header
+- Paste the value in the config.json as the token
 
-# Header 1
-## Header 2
-### Header 3
+**sourceChannel:**
+- In browser whilst on [discord](https://discord.com/app) select the channel you would like messages to be sent to
+- Right click and copy the channel ID
+- Paste this value in the config.json as the `sourceChannel`
 
-- Bulleted
-- List
+**destinationChannel:**
+- In browser whilst on [discord](https://discord.com/app) select the channel you would like to read messages from
+- Right click and copy the channel ID
+- Paste this value in the config.json as the `destinationChannel`
 
-1. Numbered
-2. List
+**messageMustInclude:**
+This is a single value string. Messages from `sourceChannel` must include this values string inorder to be send to `destinationChannel`
 
-**Bold** and _Italic_ and `Code` text
+**messageAnyIncludes:**
+This is an array of strings. Messages from `sourceChannel` must include at least one of the string values within this array inorder to be send to `destinationChannel`
 
-[Link](url) and ![Image](src)
-```
+## Running the bot
+From terminal within the discord-selfschobot directory run the following commands,
+- npm install
+- npm run start
+git add .
+git commit -m "Initial commit"
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+git remote add origin https://github.com/drdre-08/discord-selfechobot.git
+git remote -v
+git push -u origin master
 
-### Jekyll Themes
+// to use an offical discord bot:
+https://discord.com/developers/applications create you bot generate a invite link from OAuth2 browse to invite link and add to server
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/drdre-08/discord-selfechobot/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+git update-index --assume-unchanged config.json
+git update-index --no-assume-unchanged config.json
 
-### Support or Contact
+npm install nodemon
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js",
+    "debug": "nodemon ./index.ts"
+  }
