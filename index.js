@@ -13,12 +13,19 @@ if(config.sourceChannel.trim()==''){
 if(config.destinationChannel.trim()==''){
   console.log('Please provide a valid config json file: destination channel missing.');
 }
+if(!config.delayInterval){
+  console.log('Please provide a valid config json file: delay interval missing.');
+}
+if(!config.readMessages){
+  console.log('Please provide a valid config json file: read messages missing.');
+}
 if(!config.messageAnyIncludes.length){
   console.log('Please provide a valid config json file: message includes missing.');
 }
 const TOKEN = config.token.trim();
 const MESSAGEMUSTINCLUDE = config.messageMustInclude;
 const MESSAGEANYINCLUDES = config.messageAnyIncludes;
+var lastMessage = 0;
 
 // create a new Discord client
 const client = new Discord.Client();
@@ -49,12 +56,13 @@ client.on('error', error => {
 });
 
 // Register event for when client receives a message.
-client.on('message', message => {    
-    if (message.content === '!ping') {
-		// send back "Pong." to the channel the message was sent in
-		message.channel.send('Pong.');
-	}
-});
+// client.on('message', message => {
+//   console.log(message.content);
+//   if (message.content === '!ping') {
+// 		// send back "Pong." to the channel the message was sent in
+// 		message.channel.send('Pong.');
+// 	}
+// });
 
 // Send the given message to the destination channel
 async function sendMessage(message){
@@ -94,12 +102,20 @@ async function sendMessage(message){
 async function getLastMessage() {   
     // get source channel
     client.channels.fetch(config.sourceChannel).then(
-      channel => {        
-        channel.messages.fetch({ limit: 10 }).then(
+      channel => {
+        
+        channel.messages.fetch({ limit: config.readMessages }, {cache:false, force:true}).then(
           messages => {
-            
-            // loop through messages:
-            messages.forEach((message) => {              
+
+            // Loop through messages.
+            for (let obj of Array.from(messages).reverse()) {
+              var message = obj[1];
+              
+              // Only newer messages.
+              if (lastMessage>=0 && message.createdTimestamp<=lastMessage){
+                continue;
+              }
+
               // tests wether at least one element in the array passes the test
               //   array is the message includes list
               //   test is message contains/includes that message include
@@ -110,7 +126,10 @@ async function getLastMessage() {
                   sendMessage(message);
                 }
               }
-            });
+
+              // Update the last read message.
+              lastMessage = message.createdTimestamp;
+            }
           }
           ).catch(err=>{
             console.log(err);
@@ -120,14 +139,16 @@ async function getLastMessage() {
         });
 }
 
-// Every minute, read last 10 messages in channel.
+// Every config.delayInterval (seconds), read last config.readMessages number of messages from channel.
 var timerID = setInterval(function() {
   // Ensure we can run
   if (!bClientReady){
     return;
   }
 
-  // Read last 10 messages
+  // Read last messages.
   getLastMessage();
-  
-}, 60 * 1000 + Math.floor(Math.random() * 100));
+}, config.delayInterval * 1000 + Math.floor(Math.random() * 100));
+
+
+
