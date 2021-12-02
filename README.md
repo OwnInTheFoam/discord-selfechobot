@@ -31,6 +31,12 @@ In the root directory please complete the config.json file by providing the foll
 - Right click and copy the channel ID
 - Paste this value in the config.json as the `destinationChannel`
 
+**delayInterval**
+- The delay in seconds to wait before reading messages.
+
+**readMessages**
+- The number of message to read.
+
 **messageMustInclude:**
 This is a single value string. Messages from `sourceChannel` must include this values string inorder to be send to `destinationChannel`
 
