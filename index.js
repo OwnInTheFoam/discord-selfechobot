@@ -112,7 +112,7 @@ async function getLastMessage() {
               var message = obj[1];
               
               // Only newer messages.
-              if (lastMessage>=0 && message.createdTimestamp<=lastMessage){
+              if (message.createdTimestamp<=lastMessage){
                 continue;
               }
 
