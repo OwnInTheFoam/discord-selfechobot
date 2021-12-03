@@ -1,7 +1,10 @@
 // require modules
 const Discord = require('discord.js-selfbot');
 //const Discord = require('discord.js');
-const config = require('./config.json');
+
+// Load in config
+require("hjson/lib/require-config");
+const config=require("./config.hjson");
 
 // check valid config
 if(!config || config.token.trim()==''){
@@ -116,19 +119,23 @@ async function getLastMessage() {
                 continue;
               }
 
-              // tests wether at least one element in the array passes the test
-              //   array is the message includes list
-              //   test is message contains/includes that message include
-              if (MESSAGEANYINCLUDES.some(v => message.content.includes(v))) {
-                // now ensure the message includes any must include if provided.
-                if(!MESSAGEMUSTINCLUDE.length || (MESSAGEMUSTINCLUDE.length && message.content.includes(MESSAGEMUSTINCLUDE))){
-                  // we have a match post to my channel!
-                  sendMessage(message);
-                }
-              }
-
               // Update the last read message.
               lastMessage = message.createdTimestamp;
+
+              // Ensure the message includes any must include if provided.
+              if(MESSAGEMUSTINCLUDE.length && !message.content.includes(MESSAGEMUSTINCLUDE)){
+                continue;
+              }
+
+              // Ensure at least one element in the array passes the test
+              //   array is the message includes list
+              //   test is message contains/includes that message include
+              if (MESSAGEANYINCLUDES.length && !MESSAGEANYINCLUDES.some(v => message.content.includes(v))) {
+                continue;
+              }
+
+              // we have a match post to my channel!
+              sendMessage(message);
             }
           }
           ).catch(err=>{

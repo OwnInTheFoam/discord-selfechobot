@@ -1,0 +1,13 @@
+{
+  token: ""
+  sourceChannel: ""
+  destinationChannel: ""
+  delayInterval: 60
+  readMessages: 20
+  messageMustInclude: ""
+  messageAnyIncludes: [
+    "",
+    ""
+  ]
+}
+
