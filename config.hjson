@@ -1,11 +1,11 @@
 {
-  "token": "",
-  "sourceChannel": "",
-  "destinationChannel": "",
-  "delayInterval": 60,
-  "readMessages": 20,
-  "messageMustInclude": "",
-  "messageAnyIncludes": [
+  token: ""
+  sourceChannel: ""
+  destinationChannel: ""
+  delayInterval: 60
+  readMessages: 20
+  messageMustInclude: ""
+  messageAnyIncludes: [
     "",
     ""
   ]

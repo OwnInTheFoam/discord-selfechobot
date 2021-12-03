@@ -10,8 +10,11 @@ forbidden, and can result in an account termination if found."* *- quote [Discor
 Use this selfbot on your or any Discord account(s) at your own risk. I held no liablity if your accounts get terminated.
 
 # Installation
+
+This bot requires nodejs to be installed.
+
 ## Setup Configuration File
-In the root directory please complete the config.json file by providing the following parameters:
+In the root directory please complete the config.hjson file by providing the following parameters:
 
 **token:**
 - In browser whilst on [discord](https://discord.com/app) open developer tools (`ctl + shift + i`)
@@ -38,10 +41,10 @@ In the root directory please complete the config.json file by providing the foll
 - The number of message to read.
 
 **messageMustInclude:**
-This is a single value string. Messages from `sourceChannel` must include this values string inorder to be send to `destinationChannel`
+This is an optional single value string. Messages from `sourceChannel` must include this values string inorder to be send to `destinationChannel`
 
 **messageAnyIncludes:**
-This is an array of strings. Messages from `sourceChannel` must include at least one of the string values within this array inorder to be send to `destinationChannel`
+This is an optional array of strings. Messages from `sourceChannel` must include at least one of the string values within this array inorder to be send to `destinationChannel`
 
 ## Running the bot
 From terminal within the discord-selfschobot directory run the following commands,
