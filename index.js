@@ -1,7 +1,10 @@
 // require modules
 const Discord = require('discord.js-selfbot');
 //const Discord = require('discord.js');
-const config = require('./config.json');
+
+// Load in config
+require("hjson/lib/require-config");
+const config=require("./config.hjson");
 
 // check valid config
 if(!config || config.token.trim()==''){
