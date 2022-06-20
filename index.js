@@ -91,10 +91,19 @@ async function sendMessage(message){
       if (header) {
           console.log("Sending header");
       }
-
-      // Send the body
-      console.log("Sending body");
-      destChannel.send(body).catch(err=>{
+      
+      // Allow the attachments to be sent.
+      const attachments = Array.from(message.attachments, ([key, value]) => {
+        return value;
+      });
+    
+      // Send the message
+      console.log("Sending message");
+      destChannel.send(
+        {
+          content: body,
+          files: attachments,
+        }).catch(err=>{
         console.log(err);
       });
     }
