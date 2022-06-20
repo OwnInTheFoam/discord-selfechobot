@@ -25,12 +25,12 @@ In the root directory please complete the config.hjson file by providing the fol
 - Paste the value in the config.json as the token
 
 **sourceChannel:**
-- In browser whilst on [discord](https://discord.com/app) select the channel you would like messages to be sent to
+- In browser whilst on [discord](https://discord.com/app) select the channel you would like to read messages from
 - Right click and copy the channel ID
 - Paste this value in the config.json as the `sourceChannel`
 
 **destinationChannel:**
-- In browser whilst on [discord](https://discord.com/app) select the channel you would like to read messages from
+- In browser whilst on [discord](https://discord.com/app) select the channel you would like messages to be sent to
 - Right click and copy the channel ID
 - Paste this value in the config.json as the `destinationChannel`
 
